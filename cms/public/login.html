@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>登录页面</p>
+    <input type="text" id="u">
+    <input type="password" id="p">
+    <button id="send">登录</button>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/cookie.js"></script>
+    <script>
+        $("#send").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/account/login",
+                data: {
+                    u: $("#u").val(),
+                    p: ($("#p").val()+1)*6+1
+                },
+                success: function (data) {
+                    console.log(data);
+                    cookie.setCookie("name",$("#u").val());
+                    cookie.setCookie("token",($("#p").val()+1)*6+1);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
